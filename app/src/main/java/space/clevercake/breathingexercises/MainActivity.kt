@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, IntroActivity::class.java))
                 finish()
             }
-
-
     }
     private fun isFirstTimeLaunch(): Boolean {
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)

@@ -18,9 +18,9 @@ class IntroActivity : AppCompatActivity() {
     private lateinit var pagerAdapter: PagerAdapter
     private lateinit var dotsLayout: LinearLayout
     private val layouts = intArrayOf(//мои слайды
-        R.layout.intro_slide1,
-        R.layout.intro_slide2,
-        R.layout.intro_slide3
+        R.layout.intro_slide_1,
+        R.layout.intro_slide_2,
+        R.layout.intro_slide_3
     )
 
     // Имена для хранения настроек SharedPreferences

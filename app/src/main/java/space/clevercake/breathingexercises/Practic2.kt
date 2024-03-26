@@ -14,9 +14,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class Practic2  : AppCompatActivity() {
+    private var textCount = 0
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.practicformvideo)
+            setContentView(R.layout.practic_for_video)
 
 //видео
             val videoView1 = findViewById<View>(R.id.videoView) as VideoView
@@ -36,6 +37,7 @@ class Practic2  : AppCompatActivity() {
             var currentJob: Job? = null //переменная, которая хранит ссылку на текущий запущенный поток
             //КНОПКА ОСТАНОВКИ
             val buttonStop = findViewById<Button>(R.id.button2) //кнопка старт
+            buttonStop.isEnabled = false
             buttonStop.setOnClickListener {
                 try {
                     currentJob?.cancel()
@@ -47,6 +49,8 @@ class Practic2  : AppCompatActivity() {
                     //Зациклили видео
                     videoView1.setOnPreparedListener { mediaPlayer -> mediaPlayer.isLooping = true }
                     videoView1.start()
+                    buttonStop.isEnabled = false
+                    buttonStart.isEnabled = true
                 } catch (e: Exception) {
                 } //конец конструкции чтобы не вылетало
             }
@@ -57,19 +61,20 @@ class Practic2  : AppCompatActivity() {
                 currentJob?.cancel()
                 videoView1.stopPlayback()
                 // более универсальный вариант
-                videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.dogpractik2))
+                videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.dog2_new))
                 //Зациклили видео
                 videoView.setOnPreparedListener { mediaPlayer -> mediaPlayer.isLooping = true }
                 videoView.start()
                 // Если предыдущий процесс был остановлен, сбрасываем флаг
 
-
+                buttonStop.isEnabled = true
+                buttonStart.isEnabled = false
                 currentJob = lifecycleScope.launch {//Использование lifecycleScope предпочтительнее, чем использование GlobalScope
                     while (!stopbuttonlisten) {
                         runOnUiThread {
                             text.setText(R.string.inhale)
                         }
-                        delay(4000)
+                        delay(4050)
 
                         if (stopbuttonlisten) {
                             break
@@ -78,7 +83,7 @@ class Practic2  : AppCompatActivity() {
                         runOnUiThread {
                             text.setText(R.string.delay)
                         }
-                        delay(7000)
+                        delay(7050)
 
                         if (stopbuttonlisten) {
                             break
@@ -87,11 +92,24 @@ class Practic2  : AppCompatActivity() {
                         runOnUiThread {
                             text.setText(R.string.exhale)
                         }
-                        delay(8000)
+                        delay(8150)
 //
-//                        if (stopbuttonlisten) {
-//                            break
-//                        }
+                        // После каждой итерации увеличивайте счетчик
+                        textCount++
+                        // Проверьте, достигло ли количество воспроизведений 6
+                        if (textCount == 6) {
+                            // Поздравительное сообщение
+                            videoView.stopPlayback()
+                            videoView1.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.dog02))
+                            //Зациклили видео
+                            videoView1.setOnPreparedListener { mediaPlayer -> mediaPlayer.isLooping = true }
+                            videoView1.start()
+                            text.setText("Тренировка завершина :)")
+                            buttonStop.isEnabled = false
+                            buttonStart.isEnabled = true
+                            textCount = 0
+                            break
+                        }
                     }
                 }
             }

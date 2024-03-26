@@ -8,6 +8,21 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="fone">#F2F5FC</color>
+    <color name="fone">#F1F6FF</color>
     <color name="colorInactiveDot">#DBE4E9</color>
+
+
+
+    <color name="black_blue_text">#637EB8</color>
+    <color name="green">#A5BF92</color>
+    <color name="red">#E97E6C</color>
+    <color name="blue">#BED0F4</color>
+    <color name="grey">#A0A3A4</color>
+    <color name="black_blue_bt">#7B97D5</color>
+    <color name="grey_light">#868D8D</color>
+    <color name="grey_text">#666666</color>
+    <color name="grey_light_text">#BEC2C2</color>
+    <color name="black_70">#B3000000</color>
+
+
 </resources>

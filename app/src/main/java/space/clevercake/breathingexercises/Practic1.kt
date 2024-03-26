@@ -12,13 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.sql.Time
 
 class Practic1  : AppCompatActivity() {
     private var textCount = 0
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.practicformvideo)
+            setContentView(R.layout.practic_for_video)
 
 //видео
             val videoView1 = findViewById<VideoView>(R.id.videoView)
@@ -63,7 +62,7 @@ class Practic1  : AppCompatActivity() {
                 currentJob?.cancel()
                 videoView1.stopPlayback()
                 // более универсальный вариант
-                videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.dogpractik1))
+                videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.dog1_new))
                 videoView.setOnPreparedListener { mediaPlayer -> mediaPlayer.isLooping = true }
 
                 videoView.start()
@@ -110,17 +109,17 @@ class Practic1  : AppCompatActivity() {
                             // После каждой итерации увеличивайте счетчик
                             textCount++
                            // Проверьте, достигло ли количество воспроизведений 6
-                            if (textCount == 2) {
+                            if (textCount == 6) {
                                 // Поздравительное сообщение
-//                                showCongratulations()
                                 videoView.stopPlayback()
                                 videoView1.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.dog01))
                                 //Зациклили видео
                                 videoView1.setOnPreparedListener { mediaPlayer -> mediaPlayer.isLooping = true }
                                 videoView1.start()
-                                text.setText("")
+                                text.setText("Тренировка завершина :)")
                                 buttonStop.isEnabled = false
                                 buttonStart.isEnabled = true
+                                textCount = 0
                                 break
                             }
                         }
@@ -138,10 +137,6 @@ class Practic1  : AppCompatActivity() {
             }
 
         }
-    fun showCongratulations() {
-        // Для отображения поздравительного сообщения
-        textCount = 0
-    }
     }
 
 //                if (stopbuttonlisten) {
